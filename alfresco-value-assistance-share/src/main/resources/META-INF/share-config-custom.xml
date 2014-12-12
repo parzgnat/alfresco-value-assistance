@@ -1,0 +1,102 @@
+<alfresco-config>
+   
+   <!-- Repository Library config section -->
+   
+   <config evaluator="string-compare" condition="DocumentLibrary">
+      <aspects>
+         <visible>
+            <aspect name="dm:demo" />
+         </visible>
+      </aspects>
+   </config>
+    
+   <config>
+      <forms>
+         <dependencies>
+            <js src="/js/dependent-control.js" />
+            <js src="/js/dynamic-dropdown.js" />
+         </dependencies>
+      </forms>
+   </config>
+   
+   <config evaluator="node-type" condition="va:valueAssistanceListItem">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="cm:name" />
+               <show id="va:value" />
+               <show id="va:sortOrder" />
+            </field-visibility>
+            <appearance>
+               <field id="cm:name">
+                 <control>
+                    <control-param name="maxLength">255</control-param>
+                 </control>
+               </field>
+               <field id="va:value">
+                 <control>
+                    <control-param name="maxLength">255</control-param>
+                 </control>
+               </field>
+            </appearance>
+          </form>
+    	</forms>
+    </config>
+	
+	<config evaluator="model-type" condition="va:valueAssistanceListItem">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="cm:name" />
+					<show id="va:value" />
+					<show id="va:sortOrder" />
+				</field-visibility>
+				<appearance>
+				   <field id="cm:name">
+                      <control>
+                         <control-param name="maxLength">255</control-param>
+                 	  </control>
+               	   </field>
+				   <field id="va:value">
+                      <control>
+                         <control-param name="maxLength">255</control-param>
+                 	  </control>
+               	   </field>				
+               	</appearance>
+			</form>
+		</forms>
+	</config>
+	
+	<config evaluator="aspect" condition="dm:demo">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="dm:color" />
+					<show id="dm:department" />
+				</field-visibility>
+				<appearance>
+					<field id="dm:color">
+						<control template="/form-controls/dynamic-dropdown.ftl">
+							<control-param name="picklistName">Color</control-param>
+						</control>
+					</field>
+					<field id="dm:department">
+						<control template="/form-controls/dynamic-dropdown.ftl">
+							<control-param name="picklistName">Department</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<!-- make sure that mandatory dynamic dropdowns validate correctly -->
+	<config>
+	  <forms>
+	     <constraint-handlers>
+            <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.mandatory" event="keyup,propertychange,change" />
+         </constraint-handlers>
+      </forms>
+    </config>
+    
+</alfresco-config>
