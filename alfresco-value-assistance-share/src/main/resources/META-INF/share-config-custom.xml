@@ -83,6 +83,7 @@
 					<field id="dm:department">
 						<control template="/form-controls/dynamic-dropdown.ftl">
 							<control-param name="picklistName">Department</control-param>
+							<control-param name="dependsOn">prop_dm_color</control-param>
 						</control>
 					</field>
 				</appearance>
