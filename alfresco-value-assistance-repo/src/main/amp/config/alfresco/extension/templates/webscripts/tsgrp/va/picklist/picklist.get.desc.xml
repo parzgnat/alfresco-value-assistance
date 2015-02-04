@@ -4,6 +4,6 @@
     <description>provides picklist values</description>
     <url>/tsgrp/va/picklist/picklist</url>
     <format default="json">argument</format>
-    <authentication runas="admin">user</authentication>
+    <authentication runas="system">user</authentication>
     <transaction>none</transaction>
 </webscript>

@@ -36,12 +36,13 @@
 			picklistName : "",
 			initialValue : "",
 			dependsOn: [],
-			dependsOnValues: {}
+			dependsOnValues: {},
+			level : ""
 		},
         updateValues : function(dependencyValue){
             console.log("get new values, dependency:")
             
-            //since someone told us to update our values, clear our intial value so we don't default back to it
+            //since someone told us to update our values, clear our initial value so we don't default back to it
             this.options.initialValue = "";
             
             //clear our internal value since we've changed
@@ -139,7 +140,7 @@
             
             Alfresco.util.Ajax.request(
             {
-               url: Alfresco.constants.PROXY_URI + 'tsgrp/va/picklist/picklist?includeBlankItem=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+dependencyQuery,
+               url: Alfresco.constants.PROXY_URI + 'tsgrp/va/picklist/picklist?includeBlankItem=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+dependencyQuery+'&level='+this.options.level,
                method: "GET",
                responseContentType : "application/json",
                successCallback:

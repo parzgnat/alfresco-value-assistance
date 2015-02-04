@@ -45,7 +45,8 @@
 				</#if>
 			],
 			initialValue:"${fieldValue}",
-			itemId:"${(form.arguments.itemId!"")?js_string}"
+			itemId:"${(form.arguments.itemId!"")?js_string}",
+			level:"${field.control.params['level']}"
 		});
 	</#if>
 

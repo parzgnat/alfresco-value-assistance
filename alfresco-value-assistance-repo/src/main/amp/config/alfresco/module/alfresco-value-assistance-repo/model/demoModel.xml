@@ -68,5 +68,25 @@
 				</property>
 			</properties>
 		</aspect>
+		
+		<aspect name="dm:demoCascading2Level">
+			<title>Demo Cascading Aspect</title>
+			<properties>
+				<property name="dm:level1">
+					<title>Level 1</title>
+					<type>d:text</type>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+				<property name="dm:level2">
+					<title>Level 2</title>
+					<type>d:text</type>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+			</properties>
+		</aspect>
 	</aspects>
 </model>
