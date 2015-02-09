@@ -31,5 +31,5 @@
     <bean id="webscript.tsgrp.va.picklist.picklist.get" class="com.tsgrp.va.picklist.PicklistWebScript" parent="webscript"> 
         <property name="serviceRegistry" ref="ServiceRegistry" />
     </bean>
-    
+
 </beans>

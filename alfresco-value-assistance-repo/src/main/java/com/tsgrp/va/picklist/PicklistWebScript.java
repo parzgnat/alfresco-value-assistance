@@ -126,6 +126,21 @@ public class PicklistWebScript extends DeclarativeWebScript {
 			picklistLevelInt = Integer.parseInt(picklistLevel);
 		}
 
+		String VALUE_PARAMETER = null;
+
+		switch (picklistLevelInt) {
+		case 1:
+			VALUE_PARAMETER = "";
+			break;
+		case 2:
+			VALUE_PARAMETER = "level1";
+			break;
+		default:
+			break;
+		}
+
+		String FILTER_VALUE = req.getParameter(VALUE_PARAMETER);
+
 		// get the folder for the datalist
 		StringBuffer query = new StringBuffer();
 		query.append("=" + ValueAssistanceModel.CONTENT_MODEL_PREFIX + ":"
@@ -193,78 +208,90 @@ public class PicklistWebScript extends DeclarativeWebScript {
 				break;
 			}
 
-			if (FILTER_PROPERTY != null) {
-				query2.append(" AND "
-						+ ValueAssistanceModel.TSG_VALUE_ASSISTANCE_MODEL_PREFIX
-						+ ":" + FILTER_PROPERTY.getLocalName() + ":\""
-						+ "Agravo" + "\"");
-			}
-
-			// Set search parameters
-			SearchParameters searchParameters2 = new SearchParameters();
-			searchParameters2
-					.addStore(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
-
-			searchParameters2.addSort("@" + VALUE_PROPERTY, true);
-			searchParameters2.setLanguage(SearchService.LANGUAGE_FTS_ALFRESCO);
-			searchParameters2.setQuery(query2.toString());
-
-			ResultSet rs2 = serviceRegistry.getSearchService().query(
-					searchParameters2);
-
-			// see if we're just supposed to send back some labels
-			String loadLabels = req.getParameter(PARAM_LOAD_LABELS);
-			if (StringUtils.isNotBlank(loadLabels)) {
-				List<String> labels = new ArrayList<String>();
-				String initialValuesParam = req
-						.getParameter(PARAM_INITIAL_VALUES);
-				String[] initialValues = (initialValuesParam == null) ? new String[] { "" }
-						: initialValuesParam.split(",");
-				Map<String, String> valueLabelPairs = new HashMap<String, String>();
-
-				for (NodeRef nodeRef : rs2.getNodeRefs()) {
-					Map<QName, Serializable> props = serviceRegistry
-							.getNodeService().getProperties(nodeRef);
-					valueLabelPairs.put((String) props.get(VALUE_PROPERTY),
-							(String) props.get(LABEL_PROPERTY));
-				}
-
-				String label;
-				for (String initialValue : initialValues) {
-					label = valueLabelPairs.get(initialValue);
-					if (label != null) {
-						labels.add(label);
-					} else {
-						labels.add(initialValue);
-					}
-				}
-
-				model.put("labels", StringUtils.join(labels, ","));
+			List<PicklistItem> picklistItems = new ArrayList<PicklistItem>();
+			
+			if (picklistLevelInt > 1 && FILTER_VALUE.length() == 0) {
+				// returns a empty list because the filter value is empty
+				picklistItems = new ArrayList<PicklistItem>();
+				picklistItems.add(new PicklistItem("", ""));
+			
 			} else {
-				List<PicklistItem> picklistItems = new ArrayList<PicklistItem>();
-				List<String> returnedItems = new ArrayList<String>();
-
-				boolean includeBlankItem = req
-						.getParameter(PARAM_INCLUDE_BLANK_ITEM) == null ? false
-						: Boolean.parseBoolean(req
-								.getParameter(PARAM_INCLUDE_BLANK_ITEM));
-
-				if (includeBlankItem) {
-					picklistItems.add(new PicklistItem("", ""));
-					returnedItems.add("");
+				
+				if (FILTER_PROPERTY != null) {
+					query2.append(" AND "
+							+ ValueAssistanceModel.TSG_VALUE_ASSISTANCE_MODEL_PREFIX
+							+ ":" + FILTER_PROPERTY.getLocalName() + ":\""
+							+ FILTER_VALUE + "\"");
 				}
 
-				for (NodeRef nodeRef : rs2.getNodeRefs()) {
-					Map<QName, Serializable> props = serviceRegistry
-							.getNodeService().getProperties(nodeRef);
+				// Set search parameters
+				SearchParameters searchParameters2 = new SearchParameters();
+				searchParameters2
+						.addStore(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
 
-					String picklistValue = (String) props.get(VALUE_PROPERTY);
+				searchParameters2.addSort("@" + VALUE_PROPERTY, true);
+				searchParameters2
+						.setLanguage(SearchService.LANGUAGE_FTS_ALFRESCO);
+				searchParameters2.setQuery(query2.toString());
 
-					// avoid adding repeated items
-					if (!returnedItems.contains(picklistValue)) {
-						picklistItems.add(new PicklistItem(picklistValue,
-								(String) props.get(LABEL_PROPERTY)));
-						returnedItems.add(picklistValue);
+				ResultSet rs2 = serviceRegistry.getSearchService().query(
+						searchParameters2);
+
+				// see if we're just supposed to send back some labels
+				String loadLabels = req.getParameter(PARAM_LOAD_LABELS);
+				if (StringUtils.isNotBlank(loadLabels)) {
+					List<String> labels = new ArrayList<String>();
+					String initialValuesParam = req
+							.getParameter(PARAM_INITIAL_VALUES);
+					String[] initialValues = (initialValuesParam == null) ? new String[] { "" }
+							: initialValuesParam.split(",");
+					Map<String, String> valueLabelPairs = new HashMap<String, String>();
+
+					for (NodeRef nodeRef : rs2.getNodeRefs()) {
+						Map<QName, Serializable> props = serviceRegistry
+								.getNodeService().getProperties(nodeRef);
+						valueLabelPairs.put((String) props.get(VALUE_PROPERTY),
+								(String) props.get(LABEL_PROPERTY));
+					}
+
+					String label;
+					for (String initialValue : initialValues) {
+						label = valueLabelPairs.get(initialValue);
+						if (label != null) {
+							labels.add(label);
+						} else {
+							labels.add(initialValue);
+						}
+					}
+
+					model.put("labels", StringUtils.join(labels, ","));
+				} else {
+					picklistItems = new ArrayList<PicklistItem>();
+					List<String> returnedItems = new ArrayList<String>();
+
+					boolean includeBlankItem = req
+							.getParameter(PARAM_INCLUDE_BLANK_ITEM) == null ? false
+							: Boolean.parseBoolean(req
+									.getParameter(PARAM_INCLUDE_BLANK_ITEM));
+
+					if (includeBlankItem) {
+						picklistItems.add(new PicklistItem("", ""));
+						returnedItems.add("");
+					}
+
+					for (NodeRef nodeRef : rs2.getNodeRefs()) {
+						Map<QName, Serializable> props = serviceRegistry
+								.getNodeService().getProperties(nodeRef);
+
+						String picklistValue = (String) props
+								.get(VALUE_PROPERTY);
+
+						// avoid adding repeated items
+						if (!returnedItems.contains(picklistValue)) {
+							picklistItems.add(new PicklistItem(picklistValue,
+									(String) props.get(LABEL_PROPERTY)));
+							returnedItems.add(picklistValue);
+						}
 					}
 				}
 
