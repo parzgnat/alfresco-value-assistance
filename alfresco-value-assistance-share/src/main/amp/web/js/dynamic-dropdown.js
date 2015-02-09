@@ -130,11 +130,15 @@
             };
 			
             var dependencyQuery = "";
+            
+            
             if (this.options.dependsOn.length > 0)
             {
                 for (var dependencyId in this.options.dependsOnValues)
                 {
-                	dependencyQuery+="&"+TSG.Dependency.Mappings[dependencyId]+"="+this.options.dependsOnValues[dependencyId];
+                	var dependencyField = dependencyId.substring(dependencyId.lastIndexOf("_") +1, dependencyId.length);
+                	
+                	dependencyQuery+="&"+dependencyField+"="+this.options.dependsOnValues[dependencyId];
                 }
             }
             

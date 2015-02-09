@@ -177,6 +177,7 @@ public class PicklistWebScript extends DeclarativeWebScript {
 
 			QName VALUE_PROPERTY = null;
 			QName LABEL_PROPERTY = null;
+			QName FILTER_PROPERTY = null;
 
 			switch (picklistLevelInt) {
 			case 1:
@@ -186,9 +187,17 @@ public class PicklistWebScript extends DeclarativeWebScript {
 			case 2:
 				VALUE_PROPERTY = ValueAssistanceModel.PROP_LEVEL_2_VALUE;
 				LABEL_PROPERTY = ValueAssistanceModel.PROP_LEVEL_2_LABEL;
+				FILTER_PROPERTY = ValueAssistanceModel.PROP_LEVEL_1_VALUE;
 				break;
 			default:
 				break;
+			}
+
+			if (FILTER_PROPERTY != null) {
+				query2.append(" AND "
+						+ ValueAssistanceModel.TSG_VALUE_ASSISTANCE_MODEL_PREFIX
+						+ ":" + FILTER_PROPERTY.getLocalName() + ":\""
+						+ "Agravo" + "\"");
 			}
 
 			// Set search parameters
@@ -233,6 +242,8 @@ public class PicklistWebScript extends DeclarativeWebScript {
 				model.put("labels", StringUtils.join(labels, ","));
 			} else {
 				List<PicklistItem> picklistItems = new ArrayList<PicklistItem>();
+				List<String> returnedItems = new ArrayList<String>();
+
 				boolean includeBlankItem = req
 						.getParameter(PARAM_INCLUDE_BLANK_ITEM) == null ? false
 						: Boolean.parseBoolean(req
@@ -240,15 +251,21 @@ public class PicklistWebScript extends DeclarativeWebScript {
 
 				if (includeBlankItem) {
 					picklistItems.add(new PicklistItem("", ""));
+					returnedItems.add("");
 				}
 
 				for (NodeRef nodeRef : rs2.getNodeRefs()) {
 					Map<QName, Serializable> props = serviceRegistry
 							.getNodeService().getProperties(nodeRef);
 
-					picklistItems.add(new PicklistItem((String) props
-							.get(VALUE_PROPERTY), (String) props
-							.get(LABEL_PROPERTY)));
+					String picklistValue = (String) props.get(VALUE_PROPERTY);
+
+					// avoid adding repeated items
+					if (!returnedItems.contains(picklistValue)) {
+						picklistItems.add(new PicklistItem(picklistValue,
+								(String) props.get(LABEL_PROPERTY)));
+						returnedItems.add(picklistValue);
+					}
 				}
 
 				model.put("picklistItems", picklistItems);

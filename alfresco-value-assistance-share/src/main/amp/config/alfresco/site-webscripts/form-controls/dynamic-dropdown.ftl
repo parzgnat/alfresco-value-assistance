@@ -18,6 +18,7 @@
    <#assign fieldValue = context.properties[field.control.params.defaultValueContextProperty]>
 <#elseif args[field.control.params.defaultValueContextProperty]??>
    <#assign fieldValue = args[field.control.params.defaultValueContextProperty]>
+
 </#if>
 </#if>
 
@@ -91,7 +92,7 @@
 	           <#if field.control.params.styleClass??>class="${field.control.params.styleClass}"</#if>
 	           <#if field.control.params.style??>style="${field.control.params.style}"</#if>
 	           <#if field.disabled  && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true")>disabled="true"</#if>>
-	           <#if !field.control.params['loadLabel']?? >
+			   <#if !field.control.params['loadLabel']?? >
 	               <option value="${fieldValue?html}" selected="selected">${fieldValue?html}</option>
 	           </#if>
 	           <#--

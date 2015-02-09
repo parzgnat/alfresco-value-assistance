@@ -2,11 +2,9 @@
 	
 	TSG.Dependency = {};
 	
-	TSG.Dependency.Mappings = {
-			"prop_shc_format" : "storeFormats",
-			"prop_shc_department" : "departments"
-			
-	};
+//	TSG.Dependency.Mappings = {
+//			"prop_dm_level1" : "level1"			
+//	};
 	
     TSG.Dependency.changed = function(event, eventArr, handlerObject)
     {
@@ -36,7 +34,7 @@
     
     TSG.Dependency.registerHandler = function(fieldId, htmlId)
     {   
-    	//create a closure so we can get access to the htmlId field, since teh multiselects use a hidden field
+    	//create a closure so we can get access to the htmlId field, since the multiselects use a hidden field
     	(function(){
         	YAHOO.util.Event.addListener(htmlId, "change", function(){
         		var itemValue;
