@@ -2,10 +2,6 @@
 	
 	TSG.Dependency = {};
 	
-//	TSG.Dependency.Mappings = {
-//			"prop_dm_level1" : "level1"			
-//	};
-	
     TSG.Dependency.changed = function(event, eventArr, handlerObject)
     {
 
@@ -15,7 +11,6 @@
         //  itemId: property name that changed
         //  itemValue: new property value
         // }
-
 
         //handlerObject is the object that was fed to the ON method when we bound this event handler
         //handerObject.id is the property name that is checking if his dependsOn in the itemId
@@ -59,10 +54,7 @@
     		
     		
     	}());
-    	//fieldId = prop_cm_name or prop_shc_format, etc
-
     };
-    
     
     TSG.LoadLabel = function(htmlId)
 	{
