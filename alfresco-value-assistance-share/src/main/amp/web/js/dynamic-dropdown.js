@@ -57,7 +57,7 @@
     		}
             valueElement.value = "";
             
-            //need to update our internal stored values so that loadValues has all availabl values
+            //need to update our internal stored values so that loadValues has all available values
             
             for (var dependencyId in dependencyValue)
             {
