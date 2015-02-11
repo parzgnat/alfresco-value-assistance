@@ -30,8 +30,16 @@
 			new TSG.LoadLabel("${fieldHtmlId}-value").setOptions(
 			{
 				picklistName:"${field.control.params['picklistName']}",
+				dependsOn:[
+					<#if (field.control.params['dependsOn'])??>
+						<#list (field.control.params['dependsOn'])?split(",") as dependsOn>
+							"${dependsOn}"<#if dependsOn_has_next>,</#if>
+						</#list>
+					</#if>
+				],
 				initialValue:"${fieldValue}",
-				itemId:"${(form.arguments.itemId!"")?js_string}"
+				itemId:"${(form.arguments.itemId!"")?js_string}",
+				level:"${field.control.params['level']}"
 			});
 		</#if>
 	<#else>

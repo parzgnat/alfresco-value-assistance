@@ -128,10 +128,9 @@
                if (Alfresco.logger.isDebugEnabled())
                   Alfresco.logger.debug("Hidden field '" + this.id + "' as content retrieval failed");
             };
-			
+
             var dependencyQuery = "";
-            
-            
+
             if (this.options.dependsOn.length > 0)
             {
                 for (var dependencyId in this.options.dependsOnValues)

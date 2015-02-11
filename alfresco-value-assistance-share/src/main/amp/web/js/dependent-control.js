@@ -69,7 +69,10 @@
 		options : {
 			itemId : "",
 			picklistName : "",
-			initialValue : ""
+			initialValue : "",
+			dependsOn: [],
+			dependsOnValues: {},
+			level : ""
 		},
 		loadLabels : function() {
 			var spanEl = Dom.get(this.id);
@@ -93,10 +96,22 @@
                if (Alfresco.logger.isDebugEnabled())
                   Alfresco.logger.debug("Hidden field '" + this.id + "' as content retrieval failed");
             };
+            
+            var dependencyQuery = "";
+            
+            if (this.options.dependsOn.length > 0)
+            {
+                for (var dependencyId in this.options.dependsOnValues)
+                {
+                	var dependencyField = dependencyId.substring(dependencyId.lastIndexOf("_") +1, dependencyId.length);
+                	
+                	dependencyQuery+="&"+dependencyField+"="+this.options.dependsOnValues[dependencyId];
+                }
+            }
 			
             Alfresco.util.Ajax.request(
             {
-               url: Alfresco.constants.PROXY_URI + 'tsgrp/va/picklist/picklist?loadLabels=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+'&initialValues='+this.options.initialValue,
+               url: Alfresco.constants.PROXY_URI + 'tsgrp/va/picklist/picklist?loadLabels=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+'&initialValues='+this.options.initialValue+dependencyQuery+'&level='+this.options.level,
                method: "GET",
                responseContentType : "application/json",
                successCallback:
@@ -113,7 +128,26 @@
 
 		},
 		onReady : function() {
-			this.loadLabels();
+			if (this.options.dependsOn.length > 0)
+			{
+                YAHOO.Bubbling.on("tsg.changed", TSG.Dependency.changed, this );
+				
+				//field has dependencies so get them
+				var dependencyValues = {};
+				for (var i=0; i<this.options.dependsOn.length;i++)
+				{
+					var dependsOn = this.options.dependsOn[i];
+					var domElementWithValue = YAHOO.util.Dom.get(this.id.substring(0,this.id.indexOf("prop_")) + dependsOn + "-value");
+					dependencyValues[dependsOn] = domElementWithValue ? domElementWithValue.innerHTML : "";
+				}
+				this.options.dependsOnValues = dependencyValues;
+				this.loadLabels();
+			}
+			else
+			{
+				//query our service for the dropdown values, then build up the option elements, make sure to mark the selected item as well
+				this.loadLabels();
+			}
 		},
    });
 	
