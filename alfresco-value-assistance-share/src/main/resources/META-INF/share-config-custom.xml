@@ -169,15 +169,17 @@
 				<appearance>
 					<field id="dm:level1">
 						<control template="/form-controls/dynamic-dropdown.ftl">
-							<control-param name="picklistName">Tipos e subtipos de documentos</control-param>
+							<control-param name="picklistName">2-level-demo</control-param>
 							<control-param name="level">1</control-param>
+							<control-param name="loadLabel">true</control-param>
 						</control>
 					</field>
 					<field id="dm:level2">
 						<control template="/form-controls/dynamic-dropdown.ftl">
-							<control-param name="picklistName">Tipos e subtipos de documentos</control-param>
+							<control-param name="picklistName">2-level-demo</control-param>
 							<control-param name="level">2</control-param>
 							<control-param name="dependsOn">prop_dm_level1</control-param>
+							<control-param name="loadLabel">true</control-param>
 						</control>
 					</field>
 				</appearance>
