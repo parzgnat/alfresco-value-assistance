@@ -100,19 +100,7 @@
 	           <#if field.control.params.styleClass??>class="${field.control.params.styleClass}"</#if>
 	           <#if field.control.params.style??>style="${field.control.params.style}"</#if>
 	           <#if field.disabled  && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true")>disabled="true"</#if>>
-			   <#if !field.control.params['loadLabel']?? >
-	               <option value="${fieldValue?html}" selected="selected">${fieldValue?html}</option>
-	           </#if>
-	           <#--
-	           <#list field.control.params.options?split(optionSeparator) as nameValue>
-	              <#if nameValue?index_of(labelSeparator) == -1>
-	                 <option value="${nameValue?html}"<#if nameValue == fieldValue?string || (fieldValue?is_number && fieldValue?c == nameValue)> selected="selected"</#if>>${nameValue?html}</option>
-	              <#else>
-	                 <#assign choice=nameValue?split(labelSeparator)>
-	                 <option value="${choice[0]?html}"<#if choice[0] == fieldValue?string || (fieldValue?is_number && fieldValue?c == choice[0])> selected="selected"</#if>>${msgValue(choice[1])?html}</option>
-	              </#if>
-	           </#list>
-	           -->
+               <option value="${fieldValue?html}" selected="selected">${fieldValue?html}</option>
 	     </select>
 	     <@formLib.renderFieldHelp field=field />
    </#if>
