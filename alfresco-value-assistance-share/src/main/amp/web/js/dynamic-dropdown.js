@@ -135,7 +135,7 @@
             {
                 for (var dependencyId in this.options.dependsOnValues)
                 {
-                	var dependencyField = dependencyId.substring(dependencyId.lastIndexOf("_") +1, dependencyId.length);
+                	var dependencyField = "level" + (this.options.level - 1);
                 	
                 	dependencyQuery+="&"+dependencyField+"="+this.options.dependsOnValues[dependencyId];
                 }

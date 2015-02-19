@@ -210,7 +210,7 @@ public class PicklistWebScript extends DeclarativeWebScript {
 
 			List<PicklistItem> picklistItems = new ArrayList<PicklistItem>();
 			
-			if (picklistLevelInt > 1 && FILTER_VALUE.length() == 0) {
+			if (picklistLevelInt > 1 && (FILTER_VALUE == null || FILTER_VALUE.length() == 0)) {
 				// returns a empty list because the filter value is empty
 				picklistItems = new ArrayList<PicklistItem>();
 				picklistItems.add(new PicklistItem("", ""));
