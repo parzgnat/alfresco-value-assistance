@@ -1,5 +1,3 @@
-/target/
 /.settings/
 /alf_data_dev/
-*.classpath
-*.project
+/.project
