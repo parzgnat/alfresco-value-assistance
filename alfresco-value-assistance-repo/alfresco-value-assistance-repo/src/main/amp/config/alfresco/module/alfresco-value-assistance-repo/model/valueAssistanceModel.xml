@@ -1,0 +1,83 @@
+<model name="va:contentmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<description>TSG Value Assitance Content Model</description>
+	<version>1.0</version>
+
+	<imports>
+		<!-- Import Alfresco Dictionary Definitions -->
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<import uri="http://www.alfresco.org/model/datalist/1.0"
+			prefix="dl" />
+	</imports>
+
+	<namespaces>
+		<namespace uri="http://www.tsgrp.com/model/va/1.0" prefix="va" />
+	</namespaces>
+
+	<types>
+		<type name="va:1LevelValueAssistanceListItem">
+			<title>1 Level Value Assistance List</title>
+			<parent>dl:dataListItem</parent>
+			<archive>false</archive>
+			<mandatory-aspects>
+				<aspect>va:level1Aspect</aspect>
+			</mandatory-aspects>
+		</type>
+
+		<type name="va:2LevelCascadingValueAssistanceListItem">
+			<title>2 Level Cascading Value Assistance List</title>
+			<parent>dl:dataListItem</parent>
+			<archive>false</archive>
+			<mandatory-aspects>
+				<aspect>va:level1Aspect</aspect>
+				<aspect>va:level2Aspect</aspect>
+			</mandatory-aspects>
+		</type>
+	</types>
+
+	<aspects>
+		<aspect name="va:level1Aspect">
+			<title>Level 1 Aspect</title>
+			<properties>
+				<property name="va:level1Label">
+					<title>Level 1 Label</title>
+					<type>d:text</type>
+					<multiple>false</multiple>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+				<property name="va:level1Value">
+					<title>Level 1 Value</title>
+					<type>d:text</type>
+					<multiple>false</multiple>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="va:level2Aspect">
+			<title>Level 2 Aspect</title>
+			<properties>
+				<property name="va:level2Label">
+					<title>Level 2 Label</title>
+					<type>d:text</type>
+					<multiple>false</multiple>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+				<property name="va:level2Value">
+					<title>Level 2 Value</title>
+					<type>d:text</type>
+					<multiple>false</multiple>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+			</properties>
+		</aspect>
+	</aspects>
+</model>
