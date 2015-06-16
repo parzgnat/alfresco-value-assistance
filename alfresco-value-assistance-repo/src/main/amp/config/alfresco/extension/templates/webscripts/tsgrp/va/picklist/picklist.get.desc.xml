@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<webscript>
-    <shortname>TSG Picklist Webscript</shortname>
-    <description>provides picklist values</description>
-    <url>/tsgrp/va/picklist/picklist</url>
-    <format default="json">argument</format>
-    <authentication runas="system">user</authentication>
-    <transaction>none</transaction>
-</webscript>
