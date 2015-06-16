@@ -1,0 +1,198 @@
+<alfresco-config>
+
+	<config evaluator="string-compare" condition="DocumentLibrary">
+		<aspects>
+			<visible>
+				<aspect name="dm:demo" />
+				<aspect name="dm:demoCascading2Level" />
+			</visible>
+		</aspects>
+	</config>
+
+	<config>
+		<forms>
+			<dependencies>
+				<js src="/js/dependent-control.js" />
+				<js src="/js/dynamic-dropdown.js" />
+			</dependencies>
+		</forms>
+	</config>
+
+	<config evaluator="node-type" condition="va:1LevelValueAssistanceListItem">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="va:level1Value" />
+					<show id="va:level1Label" />
+				</field-visibility>
+				<appearance>
+					<field id="va:level1Value">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+					<field id="va:level1Label">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="model-type" condition="va:1LevelValueAssistanceListItem">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="va:level1Value" />
+					<show id="va:level1Label" />
+				</field-visibility>
+				<appearance>
+					<field id="va:level1Value">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+					<field id="va:level1Label">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="node-type" condition="va:2LevelCascadingValueAssistanceListItem">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="va:level1Value" />
+					<show id="va:level1Label" />
+					<show id="va:level2Value" />
+					<show id="va:level2Label" />
+				</field-visibility>
+				<appearance>
+					<field id="va:level1Value">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+					<field id="va:level1Label">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+					<field id="va:level2Value">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+					<field id="va:level2Label">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="model-type" condition="va:2LevelCascadingValueAssistanceListItem">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="va:level1Value" />
+					<show id="va:level1Label" />
+					<show id="va:level2Value" />
+					<show id="va:level2Label" />
+				</field-visibility>
+				<appearance>
+					<field id="va:level1Value">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+					<field id="va:level1Label">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+					<field id="va:level2Value">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+					<field id="va:level2Label">
+						<control>
+							<control-param name="maxLength">255</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="aspect" condition="dm:demo">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="dm:color" />
+					<show id="dm:department" />
+				</field-visibility>
+				<appearance>
+					<field id="dm:color">
+						<control template="/form-controls/dynamic-dropdown.ftl">
+							<control-param name="picklistName">Color</control-param>
+						</control>
+					</field>
+					<field id="dm:department">
+						<control template="/form-controls/dynamic-dropdown.ftl">
+							<control-param name="picklistName">Department</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="aspect" condition="dm:demoCascading2Level">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="dm:level1" />
+					<show id="dm:level2" />
+				</field-visibility>
+				<appearance>
+					<field id="dm:level1">
+						<control template="/form-controls/dynamic-dropdown.ftl">
+							<control-param name="picklistName">2-level-demo</control-param>
+							<control-param name="level">1</control-param>
+							<control-param name="loadLabel">true</control-param>
+						</control>
+					</field>
+					<field id="dm:level2">
+						<control template="/form-controls/dynamic-dropdown.ftl">
+							<control-param name="picklistName">2-level-demo</control-param>
+							<control-param name="level">2</control-param>
+							<control-param name="dependsOn">prop_dm_level1</control-param>
+							<control-param name="loadLabel">true</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<!-- make sure that mandatory dynamic dropdowns validate correctly -->
+	<config>
+		<forms>
+			<constraint-handlers>
+				<constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.mandatory"
+					event="keyup,propertychange,change" />
+			</constraint-handlers>
+		</forms>
+	</config>
+
+</alfresco-config>
