@@ -1,3 +1,5 @@
 /.settings/
 /alf_data_dev/
 /.project
+/solr.log
+/alfresco.log
