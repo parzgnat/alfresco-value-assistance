@@ -147,7 +147,7 @@ public class PicklistWebScript extends DeclarativeWebScript {
 		// Set search parameters
 		SearchParameters searchParameters = new SearchParameters();
 		searchParameters.addStore(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
-		searchParameters.setLanguage(SearchService.LANGUAGE_SOLR_FTS_ALFRESCO);
+		searchParameters.setLanguage(SearchService.LANGUAGE_FTS_ALFRESCO);
 		searchParameters.setQuery(query.toString());
 
 		ResultSet rs = searchService.query(searchParameters);
