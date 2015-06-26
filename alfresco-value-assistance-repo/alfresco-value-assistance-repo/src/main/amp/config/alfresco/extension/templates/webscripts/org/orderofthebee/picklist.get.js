@@ -62,22 +62,28 @@ function main() {
 
 function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 		loadLabels, initialValues, valueParameter, filterValue) {
-	var dataListQuery = "=cm:title:\"" + pickListName
-			+ "\" AND TYPE:\"dl:dataList\"";
+	//var dataListQuery = "=cm:title:\"" + pickListName
+	//		+ "\" AND TYPE:\"dl:dataList\"";
+	//var query = "TYPE:\"pro:prontuario\" AND @pro\\:prontuario_matricula:" + numMatricula;
+	var dataListQuery = "select DL.*, T.* from dl:dataList AS DL JOIN cm:titled AS T " +
+		"ON DL.cmis:objectId = T.cmis:objectId WHERE T.cm:title = '" + pickListName + "'";
+	
+	//var dataListQuery = "TYPE:\"dl:dataList\" AND =cm:title:\"" + pickListName + "\"";
 
 	var dataListSearchParameters = {
-		query : dataListQuery,
-		store : "workspace://SpacesStore",
-		language : "fts-alfresco"
+			query : dataListQuery,
+			store : "workspace://SpacesStore",
+			language : "cmis-alfresco"
 	};
 
 	var dataListResult = search.query(dataListSearchParameters);
+	//var dataListResult = search.query(dataListQuery);
 
 	var result = [];
 
 	if (dataListResult.length === 0) {
 		model.error = "Unable to locate data list object with title "
-				+ pickListName + ".";
+				+ pickListName + ". Query = " + dataListQuery;
 	} else {
 
 		var dataList;
