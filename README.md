@@ -185,3 +185,10 @@ Into the share-config-custom.xml file, configure your custom type to something l
 		</form>
 	</forms>
 </config>
+
+The value used in the picklistName parameter must be the same as the datalist's name.
+If you create a datalist called "Property 1 Datalist", that's the text you should use as the picklistName parameter.
+
+When creating the datalists, it's required to use of of the types defined by this addon:
+1 Level Value Assistance List - for the first level of dependency
+2 Level Cascading Value Assistance List - for the second level of dependency
