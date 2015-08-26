@@ -4,6 +4,6 @@
     <description>provides picklist values</description>
     <url>/org/orderofthebee/picklist</url>
     <format default="json">argument</format>
-    <authentication runas="system">user</authentication>
+    <authentication runas="admin">user</authentication>
     <transaction>none</transaction>
 </webscript>
