@@ -63,8 +63,20 @@ function main() {
 function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 		loadLabels, initialValues, valueParameter, filterValue) {
 
+    // TODO: properly fix this part. Make it a function or something
+    var fixedPickListName;
+    try{
+    // If the string is UTF-8, this will work and not throw an error.
+        fixedPickListName = decodeURIComponent(escape(pickListName));
+    }catch(e){
+        // If it isn't, an error will be thrown, and we can asume that we have an ISO string.
+        fixedPickListName = pickListName;
+    }
+
 	var dataListQuery = 'TYPE:"{http://www.alfresco.org/model/datalist/1.0}dataList"';
-    dataListQuery = dataListQuery + ' AND @cm\:title:"' + pickListName + '"';
+    dataListQuery = dataListQuery + ' AND @cm\:title:"' + fixedPickListName + '"';
+
+	logger.warn("dataListQuery: " + dataListQuery);
 
 	var dataListSearchParameters = {
        query: dataListQuery,
@@ -74,6 +86,8 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
     };
 
 	var dataListResult = search.query(dataListSearchParameters);
+
+	logger.warn("dataListResult: " + dataListResult.length);
 
 	var result = [];
 
