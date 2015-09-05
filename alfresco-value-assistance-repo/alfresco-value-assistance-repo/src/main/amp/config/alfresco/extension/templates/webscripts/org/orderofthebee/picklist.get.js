@@ -127,7 +127,7 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 		}
 
 		if (pickListLevel > 1
-				&& (filterValue === null || filterValue.length() === 0)) {
+				&& (filterValue === null || filterValue.length === 0)) {
 			// returns a empty list because the filter value is empty
 
 			var pickListItem = {};
