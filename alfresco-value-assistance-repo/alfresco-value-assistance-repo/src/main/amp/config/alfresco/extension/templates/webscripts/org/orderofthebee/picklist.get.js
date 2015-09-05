@@ -76,7 +76,7 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 	var dataListQuery = 'TYPE:"{http://www.alfresco.org/model/datalist/1.0}dataList"';
     dataListQuery = dataListQuery + ' AND @cm\:title:"' + fixedPickListName + '"';
 
-	logger.warn("dataListQuery: " + dataListQuery);
+	//logger.warn("dataListQuery: " + dataListQuery);
 
 	var dataListSearchParameters = {
        query: dataListQuery,
@@ -87,7 +87,7 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 
 	var dataListResult = search.query(dataListSearchParameters);
 
-	logger.warn("dataListResult: " + dataListResult.length);
+	//logger.warn("dataListResult: " + dataListResult.length);
 
 	var result = [];
 
@@ -142,7 +142,7 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 						+ filterProperty + ":\"" + filterValue + "\"";
 			}
 
-			logger.log("query: " + pickListItemsQuery);
+			//logger.log("query: " + pickListItemsQuery);
 
 			var pickListItemsSearchParameters = {
 				query : pickListItemsQuery,
