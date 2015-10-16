@@ -1,3 +1,7 @@
+function objectsArrayComparator(a,b) {
+	return a.label.localeCompare(b.label);
+}
+
 (function(TSG) {
 	var Dom = YAHOO.util.Dom,
 	Event = YAHOO.util.Event;
@@ -91,6 +95,9 @@
             	if (response.json.result && response.json.result.picklist)
             	{
             		var picklist = response.json.result.picklist;
+
+					picklist.sort(objectsArrayComparator);
+
 					for (var i=0; i<picklist.length;i++)
 					{
 						var optionElement = document.createElement("option");
