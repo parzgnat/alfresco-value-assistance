@@ -8,6 +8,19 @@ function find(valuesArray, value) {
 	return -1;
 }
 
+function fixEncodedText(text) {
+    var fixedText;
+    try{
+        // If the string is UTF-8, this will work and not throw an error.
+        fixedText = decodeURIComponent(escape(text));
+    }catch(e){
+        // If it isn't, an error will be thrown, and we can asume that we have an ISO string.
+        fixedText = text;
+    }
+
+    return fixedText;
+}
+
 function main() {
 
 	var pickListName;
@@ -63,20 +76,10 @@ function main() {
 function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 		loadLabels, initialValues, valueParameter, filterValue) {
 
-    // TODO: properly fix this part. Make it a function or something
-    var fixedPickListName;
-    try{
-    // If the string is UTF-8, this will work and not throw an error.
-        fixedPickListName = decodeURIComponent(escape(pickListName));
-    }catch(e){
-        // If it isn't, an error will be thrown, and we can asume that we have an ISO string.
-        fixedPickListName = pickListName;
-    }
+    var fixedPickListName = fixEncodedText(pickListName);
 
 	var dataListQuery = 'TYPE:"{http://www.alfresco.org/model/datalist/1.0}dataList"';
     dataListQuery = dataListQuery + ' AND @cm\:title:"' + fixedPickListName + '"';
-
-	//logger.warn("dataListQuery: " + dataListQuery);
 
 	var dataListSearchParameters = {
        query: dataListQuery,
@@ -86,8 +89,6 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
     };
 
 	var dataListResult = search.query(dataListSearchParameters);
-
-	//logger.warn("dataListResult: " + dataListResult.length);
 
 	var result = [];
 
@@ -128,8 +129,8 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 
 		if (pickListLevel > 1
 				&& (filterValue === null || filterValue.length === 0)) {
-			// returns a empty list because the filter value is empty
 
+			// returns a empty list because the filter value is empty
 			var pickListItem = {};
 			pickListItem.value = "";
 			pickListItem.label = "";
@@ -137,12 +138,12 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 			result.push(pickListItem);
 		} else {
 
+            var fixedFilterValue = fixEncodedText(filterValue);
+
 			if (typeof filterProperty !== "undefined") {
 				pickListItemsQuery = pickListItemsQuery + " AND "
-						+ filterProperty + ":\"" + filterValue + "\"";
+						+ filterProperty + ":\"" + fixedFilterValue + "\"";
 			}
-
-			//logger.log("query: " + pickListItemsQuery);
 
 			var pickListItemsSearchParameters = {
 				query : pickListItemsQuery,
