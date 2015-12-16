@@ -38,10 +38,9 @@ function main() {
 		pickListName = args.name;
 	}
 
-	if (args.level === null) {
+	pickListLevel = parseInt(args.level, 10);
+	if (isNaN(pickListLevel)) {
 		pickListLevel = 1;
-	} else {
-		pickListLevel = parseInt(args.level);
 	}
 
 	includeBlankItem = args.includeBlankItem;
