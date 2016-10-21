@@ -78,7 +78,7 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
     var fixedPickListName = fixEncodedText(pickListName);
 
 	var dataListQuery = 'TYPE:"{http://www.alfresco.org/model/datalist/1.0}dataList"';
-    dataListQuery = dataListQuery + ' AND @cm\:title:"' + fixedPickListName + '"';
+    dataListQuery = dataListQuery + ' AND =cm:title:"' + fixedPickListName + '"';
 
 	var dataListSearchParameters = {
        query: dataListQuery,
