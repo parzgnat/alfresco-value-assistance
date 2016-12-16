@@ -1,6 +1,6 @@
 function find(valuesArray, value) {
 	for (var i = 0; i < valuesArray.length; ++i) {
-		if (valuesArray[i].value == value.toString()) {
+		if (value && valuesArray[i].value == value.toString()) {
 			return i;
 		}
 	}

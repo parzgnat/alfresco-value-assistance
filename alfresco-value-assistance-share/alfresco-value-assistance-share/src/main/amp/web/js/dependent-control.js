@@ -104,14 +104,18 @@
                 for (var dependencyId in this.options.dependsOnValues)
                 {
                 	var dependencyField = "level" + (this.options.level - 1);
-                	
-                	dependencyQuery+="&"+dependencyField+"="+this.options.dependsOnValues[dependencyId];
+
+                	var encodedValue = encodeURIComponent(this.options.dependsOnValues[dependencyId]);
+
+                	dependencyQuery+="&"+dependencyField+"="+encodedValue;
                 }
             }
 			
+            var encodedInitialValue = encodeURIComponent(this.options.initialValue);
+
             Alfresco.util.Ajax.request(
             {
-               url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?loadLabels=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+'&initialValues='+this.options.initialValue+dependencyQuery+'&level='+this.options.level,
+               url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?loadLabels=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+'&initialValues='+encodedInitialValue+dependencyQuery+'&level='+this.options.level,
                method: "GET",
                responseContentType : "application/json",
                successCallback:
