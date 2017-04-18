@@ -59,6 +59,10 @@
 			],
 			itemId:"${(form.arguments.itemId!"")?js_string}",
             formId: "${(form.arguments.formId!"")?js_string}"
+            <#if (field.control.params['mode'])??>
+                ,
+                mode:"${field.control.params['mode']}"
+            </#if>
 		});
 	</#if>
 
@@ -107,6 +111,9 @@
            <#if field.disabled && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true")>disabled="true"</#if>>
      </select>
      <@formLib.renderFieldHelp field=field />
+     <#if field.control.params.mode?? && isValidMode(field.control.params.mode?upper_case)>
+        <input id="${fieldHtmlId}-mode" type="hidden" name="${field.name}-mode" value="${field.control.params.mode?upper_case}" />
+     </#if>
    </#if>
 </div>
 
@@ -124,5 +131,9 @@
       </#if>
    </#list>
    <#return false>
+</#function>
+
+<#function isValidMode modeValue>
+   <#return modeValue == "OR" || modeValue == "AND">
 </#function>
 
