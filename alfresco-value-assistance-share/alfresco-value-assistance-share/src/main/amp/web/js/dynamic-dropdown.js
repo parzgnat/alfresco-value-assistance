@@ -103,7 +103,7 @@ function objectsArrayComparator(a,b) {
 						var optionElement = document.createElement("option");
 						optionElement.innerHTML = picklist[i].label;
 
-						if (this.options.formId === "search") {
+						if (this.options.formId === "search" && picklist[i].value !== "") {
 						    optionElement.value = '\"' + picklist[i].value + '\"';
 						} else {
 						    optionElement.value = picklist[i].value;

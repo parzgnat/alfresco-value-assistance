@@ -57,7 +57,8 @@
 			              "${value}"<#if value_has_next>,</#if>
 			              </#list>
 			],
-			itemId:"${(form.arguments.itemId!"")?js_string}"
+			itemId:"${(form.arguments.itemId!"")?js_string}",
+            formId: "${(form.arguments.formId!"")?js_string}"
 		});
 	</#if>
 

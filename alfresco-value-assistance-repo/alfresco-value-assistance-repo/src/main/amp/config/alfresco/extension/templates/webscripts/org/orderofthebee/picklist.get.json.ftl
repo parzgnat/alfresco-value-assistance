@@ -14,8 +14,8 @@ ${args['callback']}(
 			[
 				<#list picklistItems as picklistItem>
 					{
-						"label" : "${picklistItem.label}",
-						"value" : "${picklistItem.value}"
+						"label" : "${(picklistItem.label!"")}",
+						"value" : "${(picklistItem.value!"")}"
 					}
 					<#if picklistItem_has_next>,</#if>
 				</#list>
