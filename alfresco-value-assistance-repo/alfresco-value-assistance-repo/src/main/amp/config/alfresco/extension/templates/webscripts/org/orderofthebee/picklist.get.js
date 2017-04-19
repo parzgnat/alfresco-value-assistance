@@ -1,10 +1,3 @@
-function stripquotes(a) {
-    if (a.charAt(0) === '"' && a.charAt(a.length-1) === '"') {
-        return a.substr(1, a.length-2);
-    }
-    return a;
-}
-
 function find(valuesArray, value) {
 	for (var i = 0; i < valuesArray.length; ++i) {
 		if (value && valuesArray[i].value == value.toString()) {
@@ -145,7 +138,6 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 		} else {
 
             var fixedFilterValue = fixEncodedText(filterValue);
-            fixedFilterValue = stripquotes(fixedFilterValue);
 
 			if (typeof filterProperty !== "undefined") {
 				pickListItemsQuery = pickListItemsQuery + " AND "

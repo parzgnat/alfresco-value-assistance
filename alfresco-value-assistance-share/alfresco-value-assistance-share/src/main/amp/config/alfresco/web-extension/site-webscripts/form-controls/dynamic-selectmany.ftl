@@ -57,12 +57,7 @@
 			              "${value}"<#if value_has_next>,</#if>
 			              </#list>
 			],
-			itemId:"${(form.arguments.itemId!"")?js_string}",
-            formId: "${(form.arguments.formId!"")?js_string}"
-            <#if (field.control.params['mode'])??>
-                ,
-                mode:"${field.control.params['mode']}"
-            </#if>
+			itemId:"${(form.arguments.itemId!"")?js_string}"
 		});
 	</#if>
 
@@ -103,6 +98,7 @@
    <#else>
       <label for="${fieldHtmlId}-entry">${field.label?html}:<#if field.mandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
       <input id="${fieldHtmlId}" type="hidden" name="${field.name}" value="${fieldValue?string}" />
+      <input type="hidden" id="${fieldHtmlId}_isListProperty" name="${field.name}_isListProperty" value="true" />
      <select id="${fieldHtmlId}-entry" name="-" multiple="multiple" size="${size}" tabindex="0"
            onchange="javascript:Alfresco.util.updateMultiSelectListValue('${fieldHtmlId}-entry', '${fieldHtmlId}', <#if field.mandatory>true<#else>false</#if>);"
            <#if field.description??>title="${field.description}"</#if> 
