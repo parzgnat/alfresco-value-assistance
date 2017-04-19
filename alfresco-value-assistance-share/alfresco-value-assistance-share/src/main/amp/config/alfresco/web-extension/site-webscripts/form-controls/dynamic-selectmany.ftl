@@ -98,6 +98,7 @@
    <#else>
       <label for="${fieldHtmlId}-entry">${field.label?html}:<#if field.mandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
       <input id="${fieldHtmlId}" type="hidden" name="${field.name}" value="${fieldValue?string}" />
+      <input type="hidden" id="${fieldHtmlId}_isListProperty" name="${field.name}_isListProperty" value="true" />
      <select id="${fieldHtmlId}-entry" name="-" multiple="multiple" size="${size}" tabindex="0"
            onchange="javascript:Alfresco.util.updateMultiSelectListValue('${fieldHtmlId}-entry', '${fieldHtmlId}', <#if field.mandatory>true<#else>false</#if>);"
            <#if field.description??>title="${field.description}"</#if> 
@@ -106,6 +107,9 @@
            <#if field.disabled && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true")>disabled="true"</#if>>
      </select>
      <@formLib.renderFieldHelp field=field />
+     <#if field.control.params.mode?? && isValidMode(field.control.params.mode?upper_case)>
+        <input id="${fieldHtmlId}-mode" type="hidden" name="${field.name}-mode" value="${field.control.params.mode?upper_case}" />
+     </#if>
    </#if>
 </div>
 
@@ -123,5 +127,9 @@
       </#if>
    </#list>
    <#return false>
+</#function>
+
+<#function isValidMode modeValue>
+   <#return modeValue == "OR" || modeValue == "AND">
 </#function>
 

@@ -201,8 +201,8 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 					var pickListItemLabel = dataListItem.properties[labelProperty];
 
 					// avoid adding repeated items
-					if (find(result, pickListItemValue) < 0) {
-						var pickListItem = {};
+					if (pickListItemValue && find(result, pickListItemValue) < 0) {
+                        var pickListItem = {};
 						pickListItem.value = pickListItemValue;
 						pickListItem.label = pickListItemLabel;
 

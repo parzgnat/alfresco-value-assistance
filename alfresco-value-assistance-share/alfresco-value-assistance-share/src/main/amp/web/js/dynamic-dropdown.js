@@ -103,11 +103,8 @@ function objectsArrayComparator(a,b) {
 						var optionElement = document.createElement("option");
 						optionElement.innerHTML = picklist[i].label;
 
-						if (this.options.formId === "search") {
-						    optionElement.value = '\"' + picklist[i].value + '\"';
-						} else {
-						    optionElement.value = picklist[i].value;
-						}
+						optionElement.value = picklist[i].value;
+
 						if (this.options.initialValue instanceof Array && this.options.initialValue.indexOf(picklist[i].value) !== -1)
 						{
 							optionElement.selected = "selected";

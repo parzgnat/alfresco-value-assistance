@@ -95,8 +95,10 @@
       </div>
    <#else>
       <label for="${fieldHtmlId}">${field.label?html}:<#if field.mandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
+      <input type="hidden" id="${fieldHtmlId}_isListProperty" name="${field.name}_isListProperty" value="true" />
 	     <select id="${fieldHtmlId}" name="${field.name}" tabindex="0"
 	           <#if field.description??>title="${field.description}"</#if>
+	           <#if field.indexTokenisationMode??>class="non-tokenised"</#if>
 	           <#if field.control.params.size??>size="${field.control.params.size}"</#if> 
 	           <#if field.control.params.styleClass??>class="${field.control.params.styleClass}"</#if>
 	           <#if field.control.params.style??>style="${field.control.params.style}"</#if>
