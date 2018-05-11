@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.orderofthebee</groupId>
     <artifactId>alfresco-value-assistance-repo</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
     <name>alfresco-value-assistance-repo Platform Module</name>
     <description>alfresco-value-assistance-repo Platform Module</description>
     <packaging>jar</packaging>
