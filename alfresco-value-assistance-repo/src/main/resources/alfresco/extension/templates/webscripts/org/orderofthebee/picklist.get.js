@@ -43,7 +43,7 @@ function main() {
 		pickListLevel = 1;
 	}
 
-	includeBlankItem = args.includeBlankItem;
+	includeBlankItem = (args.includeBlankItem === 'true');
 	loadLabels = args.loadLabels;
 
 	if (args.initialValues === null) {

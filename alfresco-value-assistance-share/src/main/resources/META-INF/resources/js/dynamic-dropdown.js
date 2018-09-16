@@ -41,7 +41,8 @@ function objectsArrayComparator(a,b) {
 			initialValue : "",
 			dependsOn: [],
 			dependsOnValues: {},
-			level : ""
+			level : "",
+			includeBlankItem : "true"
 		},
         updateValues : function(dependencyValue){
             console.log("get new values, dependency:")
@@ -115,7 +116,14 @@ function objectsArrayComparator(a,b) {
 						}
 						selectEl.appendChild(optionElement);
 					}
-            	}
+
+					if (this.options.includeBlankItem === "false" && picklist.length > 0) {
+						var itemValue = selectEl.value;
+						var itemId = this.id.substring(this.id.indexOf("prop_"), this.id.length);
+						
+						YAHOO.Bubbling.fire("tsg.changed", {itemId:itemId, itemValue:itemValue});
+					}
+				}
             	
 				YAHOO.Bubbling.fire("mandatoryControlValueUpdated", this);
             };
@@ -154,7 +162,7 @@ function objectsArrayComparator(a,b) {
             
             Alfresco.util.Ajax.request(
             {
-               url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?includeBlankItem=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+dependencyQuery+'&level='+this.options.level,
+               url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?includeBlankItem='+this.options.includeBlankItem+'&name='+this.options.picklistName+'&itemId='+this.options.itemId+dependencyQuery+'&level='+this.options.level,
                method: "GET",
                responseContentType : "application/json",
                successCallback:
