@@ -56,7 +56,12 @@
 			initialValue:"${fieldValue}",
 			itemId:"${(form.arguments.itemId!"")?js_string}",
 			level:"${field.control.params['level']!"1"}",
-			formId: "${(form.arguments.formId!"")?js_string}"
+			formId: "${(form.arguments.formId!"")?js_string}",
+			<#if field.control.params.includeBlankItem?? && field.control.params.includeBlankItem == "false">
+				includeBlankItem: "false"
+            <#else>
+            	includeBlankItem: "true"
+      		</#if>
 		});
 	</#if>
 

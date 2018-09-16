@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.orderofthebee</groupId>
     <artifactId>alfresco-value-assistance-repo</artifactId>
-    <version>1.5</version>
+    <version>1.6</version>
     <name>alfresco-value-assistance-repo Platform Module</name>
     <description>alfresco-value-assistance-repo Platform Module</description>
     <packaging>jar</packaging>
@@ -167,7 +167,6 @@
                 the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
                 module.
             -->
-            <!--
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.6</version>
@@ -192,7 +191,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            -->
 
             <!-- Hot reloading with JRebel -->
             <plugin>
