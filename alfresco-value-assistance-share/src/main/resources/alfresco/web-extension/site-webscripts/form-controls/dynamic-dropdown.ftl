@@ -29,7 +29,7 @@
 		<#if field.control.params['loadLabel']??>
 			new TSG.LoadLabel("${fieldHtmlId}-value").setOptions(
 			{
-				picklistName:"${field.control.params['picklistName']}",
+				picklistName: "${field.control.params['picklistName']!""}",
 				dependsOn:[
 					<#if (field.control.params['dependsOn'])??>
 						<#list (field.control.params['dependsOn'])?split(",") as dependsOn>
@@ -37,6 +37,29 @@
 						</#list>
 					</#if>
 				],
+				
+				dynamicPicklistNameDependsOn: [
+					<#if (field.control.params['dynamicPicklistNameDependsOn'])??>
+						<#list (field.control.params['dynamicPicklistNameDependsOn'])?split(",") as dynamicPicklistNameDependsOn>
+							"${dynamicPicklistNameDependsOn}"<#if dynamicPicklistNameDependsOn_has_next>,</#if>
+						</#list>
+					</#if>
+				],
+				dynamicPicklistValues: [
+					<#if (field.control.params['dynamicPicklistValues'])??>
+						<#list (field.control.params['dynamicPicklistValues'])?split(",") as dynamicPicklistValues>
+							"${dynamicPicklistValues}"<#if dynamicPicklistValues_has_next>,</#if>
+						</#list>
+					</#if>
+				],
+				dynamicPicklistNames: [
+					<#if (field.control.params['dynamicPicklistNames'])??>
+						<#list (field.control.params['dynamicPicklistNames'])?split(",") as dynamicPicklistNames>
+							"${dynamicPicklistNames}"<#if dynamicPicklistNames_has_next>,</#if>
+						</#list>
+					</#if>
+				],
+				
 				initialValue:"${fieldValue}",
 				itemId:"${(form.arguments.itemId!"")?js_string}",
 				level:"${field.control.params['level']!"1"}"
@@ -45,7 +68,7 @@
 	<#else>
 		new TSG.DynamicDropdown("${fieldHtmlId}").setOptions(
 		{
-			picklistName:"${field.control.params['picklistName']}",
+			picklistName: "${field.control.params['picklistName']!""}",
 			dependsOn:[
 				<#if (field.control.params['dependsOn'])??>
 					<#list (field.control.params['dependsOn'])?split(",") as dependsOn>
@@ -53,6 +76,29 @@
 					</#list>
 				</#if>
 			],
+			
+			dynamicPicklistNameDependsOn: [
+				<#if (field.control.params['dynamicPicklistNameDependsOn'])??>
+					<#list (field.control.params['dynamicPicklistNameDependsOn'])?split(",") as dynamicPicklistNameDependsOn>
+						"${dynamicPicklistNameDependsOn}"<#if dynamicPicklistNameDependsOn_has_next>,</#if>
+					</#list>
+				</#if>
+			],
+			dynamicPicklistValues: [
+				<#if (field.control.params['dynamicPicklistValues'])??>
+					<#list (field.control.params['dynamicPicklistValues'])?split(",") as dynamicPicklistValues>
+						"${dynamicPicklistValues}"<#if dynamicPicklistValues_has_next>,</#if>
+					</#list>
+				</#if>
+			],
+			dynamicPicklistNames: [
+				<#if (field.control.params['dynamicPicklistNames'])??>
+					<#list (field.control.params['dynamicPicklistNames'])?split(",") as dynamicPicklistNames>
+						"${dynamicPicklistNames}"<#if dynamicPicklistNames_has_next>,</#if>
+					</#list>
+				</#if>
+			],
+				
 			initialValue:"${fieldValue}",
 			itemId:"${(form.arguments.itemId!"")?js_string}",
 			level:"${field.control.params['level']!"1"}",

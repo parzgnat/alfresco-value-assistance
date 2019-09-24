@@ -41,6 +41,11 @@ function objectsArrayComparator(a,b) {
 			initialValue : "",
 			dependsOn: [],
 			dependsOnValues: {},
+			
+			dynamicPicklistNameDependsOn: [],
+			dynamicPicklistValues: [],
+			dynamicPicklistNames: [],
+			
 			level : "",
 			includeBlankItem : "true"
 		},
@@ -152,6 +157,10 @@ function objectsArrayComparator(a,b) {
             {
                 for (var dependencyId in this.options.dependsOnValues)
                 {
+                	if (this.options.dynamicPicklistNameDependsOn.length > 0 && this.options.dynamicPicklistNameDependsOn[0] == dependencyId) {
+                		// ignore the property, as it is only used to define the dynamic picklist name
+                		continue;
+                	}
                 	var dependencyField = "level" + (this.options.level - 1);
 
                 	var encodedValue = encodeURIComponent(this.options.dependsOnValues[dependencyId]);
@@ -160,11 +169,19 @@ function objectsArrayComparator(a,b) {
                 }
             }
             
+            if (this.options.dynamicPicklistNameDependsOn.length > 0)
+            {
+        		var index = this.options.dynamicPicklistValues.indexOf(this.options.dependsOnValues[this.options.dynamicPicklistNameDependsOn[0]]);
+        		if (index >= 0) {
+        			this.options.picklistName = this.options.dynamicPicklistNames[index];
+        		}
+            }
+            
             Alfresco.util.Ajax.request(
             {
                url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?includeBlankItem='+this.options.includeBlankItem+'&name='+this.options.picklistName+'&itemId='+this.options.itemId+dependencyQuery+'&level='+this.options.level,
                method: "GET",
-               responseContentType : "application/json",
+               responseContentType: "application/json",
                successCallback:
                {
                   fn: onSuccess,
