@@ -11,5 +11,10 @@
                 <value>alfresco/module/${project.artifactId}/model/valueAssistanceModel.xml</value>
             </list>
         </property>
+        <property name="labels">
+            <list>
+                <value>alfresco/module/${project.artifactId}/messages/valueAssistanceModel</value>
+            </list>        
+        </property>
     </bean>
 </beans>
