@@ -28,6 +28,7 @@ function main() {
 	var includeBlankItem;
 	var loadLabels;
 	var initialValues;
+	var onlyEnabledValues = true;
 
 	if (args.name === null) {
 		status.code = 500;
@@ -41,6 +42,10 @@ function main() {
 	pickListLevel = parseInt(args.level, 10);
 	if (isNaN(pickListLevel)) {
 		pickListLevel = 1;
+	}
+	
+	if (args.onlyEnabledValues !== null) {
+		onlyEnabledValues = (args.onlyEnabledValues === 'true');
 	}
 
 	includeBlankItem = (args.includeBlankItem === 'true');
@@ -69,11 +74,11 @@ function main() {
 
 	model.picklistItems = getPickListItems(pickListName, pickListLevel,
 			includeBlankItem, loadLabels, initialValues, valueParameter,
-			filterValue);
+			filterValue, onlyEnabledValues);
 }
 
 function getPickListItems(pickListName, pickListLevel, includeBlankItem,
-		loadLabels, initialValues, valueParameter, filterValue) {
+		loadLabels, initialValues, valueParameter, filterValue, onlyEnabledValues) {
 
     var fixedPickListName = fixEncodedText(pickListName);
 
@@ -107,6 +112,11 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 
 		var pickListItemsQuery = "PARENT:\"" + dataList.nodeRef + "\"";
 
+		if (onlyEnabledValues) {
+			pickListItemsQuery = pickListItemsQuery + " AND =va:valueEnabled:true";
+			logger.warn(pickListItemsQuery);
+		}
+		
 		switch (pickListLevel) {
 		case 1:
 			pickListItemsQuery = pickListItemsQuery

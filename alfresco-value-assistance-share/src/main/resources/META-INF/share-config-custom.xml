@@ -24,6 +24,7 @@
 				<field-visibility>
 					<show id="va:level1Value" />
 					<show id="va:level1Label" />
+					<show id="va:valueEnabled" />
 				</field-visibility>
 				<appearance>
 					<field id="va:level1Value">
@@ -47,6 +48,7 @@
 				<field-visibility>
 					<show id="va:level1Value" />
 					<show id="va:level1Label" />
+					<show id="va:valueEnabled" />
 				</field-visibility>
 				<appearance>
 					<field id="va:level1Value">
@@ -61,6 +63,13 @@
 					</field>
 				</appearance>
 			</form>
+			<form id="datagrid">
+                <field-visibility>
+                    <show id="va:level1Value" force="true" />
+                    <show id="va:level1Label" force="true" />
+                    <show id="va:valueEnabled" force="true" />
+                </field-visibility>
+            </form>
 		</forms>
 	</config>
 
@@ -72,6 +81,7 @@
 					<show id="va:level1Label" />
 					<show id="va:level2Value" />
 					<show id="va:level2Label" />
+					<show id="va:valueEnabled" />
 				</field-visibility>
 				<appearance>
 					<field id="va:level1Value">
@@ -107,6 +117,7 @@
 					<show id="va:level1Label" />
 					<show id="va:level2Value" />
 					<show id="va:level2Label" />
+					<show id="va:valueEnabled" />
 				</field-visibility>
 				<appearance>
 					<field id="va:level1Value">
@@ -131,6 +142,15 @@
 					</field>
 				</appearance>
 			</form>
+			<form id="datagrid">
+                <field-visibility>
+                    <show id="va:level1Value" force="true" />
+                    <show id="va:level1Label" force="true" />
+                    <show id="va:level2Value" force="true" />
+                    <show id="va:level2Label" force="true" />
+                    <show id="va:valueEnabled" force="true" />
+                </field-visibility>
+            </form>
 		</forms>
 	</config>
 
