@@ -115,7 +115,7 @@
 
             Alfresco.util.Ajax.request(
             {
-               url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?loadLabels=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+'&initialValues='+encodedInitialValue+dependencyQuery+'&level='+this.options.level,
+               url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?loadLabels=true&name='+this.options.picklistName+'&itemId='+this.options.itemId+'&initialValues='+encodedInitialValue+dependencyQuery+'&level='+this.options.level+'&onlyEnabledValues='+this.options.onlyEnabledValues,
                method: "GET",
                responseContentType : "application/json",
                successCallback:

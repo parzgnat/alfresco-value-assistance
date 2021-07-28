@@ -12,6 +12,12 @@
    <#assign labelSeparator="|">
 </#if>
 
+<#if field.control.params.onlyEnabledValues??>
+   <#assign onlyEnabledValues=field.control.params.onlyEnabledValues>
+<#else>
+   <#assign onlyEnabledValues="true">
+</#if>
+
 <#assign fieldValue=field.value>
 
 <#if fieldValue?string == "" && field.control.params.defaultValueContextProperty??>
@@ -49,7 +55,8 @@
 		],
 		itemId:"${(form.arguments.itemId!"")?js_string}",
         level:"${field.control.params['level']!"1"}",
-        formId: "${(form.arguments.formId!"")?js_string}"
+        formId: "${(form.arguments.formId!"")?js_string}",
+		onlyEnabledValues: "${onlyEnabledValues}"
 	});
 
 })(window.TSG = window.TSG || {});

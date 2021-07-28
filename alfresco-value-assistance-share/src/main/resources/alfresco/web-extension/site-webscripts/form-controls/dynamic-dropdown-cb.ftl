@@ -39,6 +39,11 @@
 		itemId:"${(form.arguments.itemId!"")?js_string}",
 		level:"${field.control.params['level']!"1"}",
 		formId: "${(form.arguments.formId!"")?js_string}",
+		<#if field.control.params.onlyEnabledValues?? && field.control.params.onlyEnabledValues == "false">
+		   onlyEnabledValues: "false",
+		<#else>
+		   onlyEnabledValues: "true",
+		</#if>
 		<#if field.control.params.includeBlankItem?? && field.control.params.includeBlankItem == "false">
 			includeBlankItem: "false"
         <#else>
