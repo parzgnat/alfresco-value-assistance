@@ -113,8 +113,7 @@ function getPickListItems(pickListName, pickListLevel, includeBlankItem,
 		var pickListItemsQuery = "PARENT:\"" + dataList.nodeRef + "\"";
 
 		if (onlyEnabledValues) {
-			pickListItemsQuery = pickListItemsQuery + " AND =va:valueEnabled:true";
-			logger.warn(pickListItemsQuery);
+			pickListItemsQuery = pickListItemsQuery + " AND va:valueEnabled:true";
 		}
 		
 		switch (pickListLevel) {
