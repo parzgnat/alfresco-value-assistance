@@ -22,6 +22,7 @@
 			<archive>false</archive>
 			<mandatory-aspects>
 				<aspect>va:level1Aspect</aspect>
+				<aspect>va:valueEnabledAspect</aspect>
 			</mandatory-aspects>
 		</type>
 
@@ -32,6 +33,7 @@
 			<mandatory-aspects>
 				<aspect>va:level1Aspect</aspect>
 				<aspect>va:level2Aspect</aspect>
+				<aspect>va:valueEnabledAspect</aspect>
 			</mandatory-aspects>
 		</type>
 	</types>
@@ -73,6 +75,19 @@
 					<title>Level 2 Value</title>
 					<type>d:text</type>
 					<multiple>false</multiple>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="va:valueEnabledAspect">
+			<title>Value Enabled Aspect</title>
+			<properties>
+				<property name="va:valueEnabled">
+					<title>Enabled</title>
+					<type>d:boolean</type>
+					<default>true</default>
 					<index enabled="true">
 						<tokenised>false</tokenised>
 					</index>

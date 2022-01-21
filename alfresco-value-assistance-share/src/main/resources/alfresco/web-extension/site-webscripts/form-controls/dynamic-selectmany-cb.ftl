@@ -12,6 +12,12 @@
    <#assign labelSeparator="|">
 </#if>
 
+<#if field.control.params.onlyEnabledValues??>
+   <#assign onlyEnabledValues=field.control.params.onlyEnabledValues>
+<#else>
+   <#assign onlyEnabledValues="true">
+</#if>
+
 <#assign fieldValue=field.value>
 
 <#if fieldValue?string == "" && field.control.params.defaultValueContextProperty??>
@@ -49,14 +55,23 @@
 		],
 		itemId:"${(form.arguments.itemId!"")?js_string}",
         level:"${field.control.params['level']!"1"}",
-        formId: "${(form.arguments.formId!"")?js_string}"
+        formId: "${(form.arguments.formId!"")?js_string}",
+		onlyEnabledValues: "${onlyEnabledValues}"
 	});
 
 })(window.TSG = window.TSG || {});
 //]]></script>
 
-<div class="yui-gc">
-	<div class="yui-u first">
+<div class="yui-gf">
+	<div class="yui-u first" style="float: left;width: auto;">
+		<div class="form-field">
+        	<br/>
+        	<input class="formsCheckBox" id="${fieldHtmlId}-entry" type="checkbox" tabindex="0" 
+                   onchange='disableSiblingInputField("${fieldHtmlId}-entry");' />
+        	<label for="${fieldHtmlId}-entry" class="checkbox">${msg("edit-details.label.edit-metadata")}</label>
+      	</div>
+	</div>
+	<div class="yui-u" style="width: 85%;">
 		<div class="form-field">
 			<label for="${fieldHtmlId}-entry">${field.label?html}:<#if field.mandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
 			<input id="${fieldHtmlId}" type="hidden" name="${field.name}" value="${fieldValue?string}" />
@@ -73,14 +88,6 @@
 				<input id="${fieldHtmlId}-mode" type="hidden" name="${field.name}-mode" value="${field.control.params.mode?upper_case}" />
 			</#if>
 		</div>
-	</div>
-	<div class="yui-u">
-		<div class="form-field">
-        	<br/>
-        	<input class="formsCheckBox" id="${fieldHtmlId}-entry" type="checkbox" tabindex="0" 
-                   onchange='disableSiblingInputField("${fieldHtmlId}-entry");' />
-        	<label for="${fieldHtmlId}-entry" class="checkbox">${msg("edit-details.label.edit-metadata")}</label>
-      	</div>
     </div>
 </div>
 

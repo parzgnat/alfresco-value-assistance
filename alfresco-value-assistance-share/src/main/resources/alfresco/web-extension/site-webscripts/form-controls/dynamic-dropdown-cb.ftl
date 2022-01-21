@@ -39,6 +39,11 @@
 		itemId:"${(form.arguments.itemId!"")?js_string}",
 		level:"${field.control.params['level']!"1"}",
 		formId: "${(form.arguments.formId!"")?js_string}",
+		<#if field.control.params.onlyEnabledValues?? && field.control.params.onlyEnabledValues == "false">
+		   onlyEnabledValues: "false",
+		<#else>
+		   onlyEnabledValues: "true",
+		</#if>
 		<#if field.control.params.includeBlankItem?? && field.control.params.includeBlankItem == "false">
 			includeBlankItem: "false"
         <#else>
@@ -48,9 +53,17 @@
 
 })(window.TSG = window.TSG || {});
 //]]></script>
-<div class="yui-gc">
-	<div class="yui-u first">
+<div class="yui-gf">
+	<div class="yui-u first" style="float: left;width: auto;">
 		<div class="form-field">
+    		<br/>
+    		<input class="formsCheckBox" id="${fieldHtmlId}-entry" type="checkbox" tabindex="0" 
+               onchange='disableSiblingInputField("${fieldHtmlId}");' />
+    		<label for="${fieldHtmlId}-entry" class="checkbox">${msg("edit-details.label.edit-metadata")}</label>
+  		</div>
+	</div>
+	<div class="yui-u" style="width: 85%;">
+  		<div class="form-field">
 	      	<label for="${fieldHtmlId}">${field.label?html}:<#if field.mandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
 	      	<input type="hidden" id="${fieldHtmlId}_isListProperty" name="${field.name}_isListProperty" value="true" />
 	     	<select id="${fieldHtmlId}" name="${field.name}" tabindex="0"
@@ -64,14 +77,6 @@
 	     	</select>
 	    	<@formLib.renderFieldHelp field=field />
 		</div>
-	</div>
-	<div class="yui-u">
-  		<div class="form-field">
-    		<br/>
-    		<input class="formsCheckBox" id="${fieldHtmlId}-entry" type="checkbox" tabindex="0" 
-               onchange='disableSiblingInputField("${fieldHtmlId}");' />
-    		<label for="${fieldHtmlId}-entry" class="checkbox">${msg("edit-details.label.edit-metadata")}</label>
-  		</div>
 	</div>
 </div>
 <script type="text/javascript">//<![CDATA[

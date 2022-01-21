@@ -47,7 +47,8 @@ function objectsArrayComparator(a,b) {
 			dynamicPicklistNames: [],
 			
 			level : "",
-			includeBlankItem : "true"
+			includeBlankItem : "true",
+            onlyEnabledValues: "true"
 		},
         updateValues : function(dependencyValue){
             console.log("get new values, dependency:")
@@ -179,7 +180,8 @@ function objectsArrayComparator(a,b) {
             
             Alfresco.util.Ajax.request(
             {
-               url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?includeBlankItem='+this.options.includeBlankItem+'&name='+this.options.picklistName+'&itemId='+this.options.itemId+dependencyQuery+'&level='+this.options.level,
+               url: Alfresco.constants.PROXY_URI + 'org/orderofthebee/picklist?includeBlankItem='+this.options.includeBlankItem+'&name='+this.options.picklistName+
+               		'&itemId='+this.options.itemId+dependencyQuery+'&level='+this.options.level+'&onlyEnabledValues='+this.options.onlyEnabledValues,
                method: "GET",
                responseContentType: "application/json",
                successCallback:
