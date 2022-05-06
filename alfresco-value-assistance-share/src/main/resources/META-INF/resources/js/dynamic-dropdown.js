@@ -85,6 +85,8 @@ function objectsArrayComparator(a,b) {
         },
 		loadValues : function() {
     		var selectEl = Dom.get(this.id);
+    		
+    		selectEl.style="width: -moz-available;width: -webkit-fill-available;"
 
 			// success handler, populate the dropdown
             var onSuccess = function (response)
