@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+    <shortname>TSG Picklist Webscript</shortname>
+    <description>provides picklist values</description>
+    <url>/org/orderofthebee/picklist</url>
+    <format default="json">argument</format>
+    <authentication runas="admin">user</authentication>
+    <transaction>none</transaction>
+</webscript>

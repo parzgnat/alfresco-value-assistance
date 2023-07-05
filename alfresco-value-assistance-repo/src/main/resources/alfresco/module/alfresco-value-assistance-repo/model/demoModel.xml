@@ -1,0 +1,92 @@
+<model name="dm:contentmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<description>TSG Demo Content Model</description>
+	<version>1.0</version>
+
+	<imports>
+		<!-- Import Alfresco Dictionary Definitions -->  
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+		<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+	</imports> 
+
+	<namespaces>
+		<namespace uri="http://www.tsgrp.com/model/demo/1.0" prefix="dm"/>
+	</namespaces> 
+
+	<constraints>
+		<constraint name="dm:colorList" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+				    <value></value>
+					<value>Red</value>
+					<value>Orange</value>
+					<value>Yellow</value>
+					<value>Green</value>
+					<value>Blue</value>
+					<value>Violet</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="dm:departmentList" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+				    <value></value>
+					<value>Accounting</value>
+					<value>Human Resources</value>
+					<value>Information Technology</value>
+					<value>Legal</value>
+					<value>Marketing</value>
+					<value>Operations</value>
+					<value>Sales</value>
+				</list>
+			</parameter>
+		</constraint>
+	</constraints>
+
+	<types>
+
+	</types>
+
+	<aspects>
+		<aspect name="dm:demo">
+			<title>Demo Aspect</title>
+			<properties>
+				<property name="dm:department">
+					<title>Department</title>
+					<type>d:text</type>
+					<multiple>true</multiple>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+				<property name="dm:color">
+					<title>Color</title>
+					<type>d:text</type>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+			</properties>
+		</aspect>
+		
+		<aspect name="dm:demoCascading2Level">
+			<title>Demo Cascading Aspect</title>
+			<properties>
+				<property name="dm:level1">
+					<title>Level 1</title>
+					<type>d:text</type>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+				<property name="dm:level2">
+					<title>Level 2</title>
+					<type>d:text</type>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+			</properties>
+		</aspect>
+	</aspects>
+</model>
